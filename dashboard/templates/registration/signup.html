@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+
+{% block title %}Sign Up - AKILIMO Dashboard{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+     
+    <div class="col-md-6 col-lg-4">
+        <div class="d-flex justify-content-center mb-3">
+            <img src="{% static 'images/akilimo.png' %}" alt="LOGO" style="width: 80px;">
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Sign Up</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="{{ form.firstname.id_for_label }}" class="form-label">First Name</label>
+                        {{ form.firstname|add_class:"form-control" }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.lastname.id_for_label }}" class="form-label">Last Name</label>
+                        {{ form.lastname|add_class:"form-control" }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
+                        {{ form.email|add_class:"form-control" }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.gender.id_for_label }}" class="form-label">Gender</label>
+                        {{ form.gender|add_class:"form-control" }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.organization.id_for_label }}" class="form-label">Organization</label>
+                        {{ form.organization|add_class:"form-control" }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.country.id_for_label }}" class="form-label">Country</label>
+                        {{ form.country|add_class:"form-control" }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.state.id_for_label }}" class="form-label">State</label>
+                        {{ form.state|add_class:"form-control" }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.password1.id_for_label }}" class="form-label">Password</label>
+                        {{ form.password1|add_class:"form-control" }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.password2.id_for_label }}" class="form-label">Confirm Password</label>
+                        {{ form.password2|add_class:"form-control" }}
+                    </div>
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.errors }}
+                        </div>
+                    {% endif %}
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success">Sign Up</button>
+                    </div>
+                </form>
+                <div class="text-center mt-3">
+                    <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.querySelector('form').addEventListener('submit', function(e) {
+        var gender = document.getElementById('{{ form.gender.id_for_label }}');
+        var country = document.getElementById('{{ form.country.id_for_label }}');
+        
+        if (gender.value === '' || country.value === '') {
+            e.preventDefault();
+            alert('Please select both Gender and Country');
+        }
+    });
+</script>
+    
+{% endblock %}
