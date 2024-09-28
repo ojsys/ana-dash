@@ -66,21 +66,22 @@ class Partner(models.Model):
         return self.name
 
 class Farmer(models.Model):
-    partner = models.ForeignKey(Partner, on_delete=models.CASCADE)
-    firstname = models.CharField(max_length=100)
-    lastname = models.CharField(max_length=100)
-    gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
-    phone_no = models.CharField(max_length=20)
-    own_phone = models.BooleanField(default=False)
-    crops = models.CharField(max_length=50, blank=True)
-    crops_other = models.CharField(max_length=50, blank=True)
+    partner = models.CharField(max_length=100, null=True, blank=True)
+    firstname = models.CharField(max_length=100, null=True, blank=True)
+    lastname = models.CharField(max_length=100, null=True, blank=True)
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, null=True)
+    phone_no = models.CharField(max_length=20, null=True, blank=True)
+    own_phone = models.BooleanField(default=False, null=True, blank=True)
+    crops = models.CharField(max_length=50, blank=True, null=True)
+    crops_other = models.CharField(max_length=50, blank=True, null=True)
     farm_area = models.DecimalField(max_digits=10, decimal_places=2, null=True)
-    area_unit = models.CharField(max_length=50, blank=True)
-    cassava = models.BooleanField(default=False)
-    yam = models.BooleanField(default=False)
-    maize = models.BooleanField(default=False)
-    rice = models.BooleanField(default=False)
-    sorghum = models.BooleanField(default=False)
+    area_unit = models.CharField(max_length=50, blank=True, null=True)
+    cassava = models.BooleanField(default=False, null=True, blank=True)
+    yam = models.BooleanField(default=False, null=True, blank=True)
+    maize = models.BooleanField(default=False, null=True, blank=True)
+    rice = models.BooleanField(default=False, null=True, blank=True)
+    sorghum = models.BooleanField(default=False, null=True, blank=True)
+    index = models.IntegerField(default=0, null=True, blank=True)
 
     def __str__(self):
         return f"{self.firstname} {self.lastname}"
